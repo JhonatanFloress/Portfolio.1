@@ -1,46 +1,56 @@
 # Portafolio de Jhonatan Sánchez
 
-Sitio personal estático construido con HTML, CSS y JavaScript. Incluye experiencia, tecnologías, perfil, descarga del CV y contacto.
+Sitio personal con HTML, CSS y JavaScript. Node.js sirve el sitio durante el desarrollo y prepara los archivos para Vercel. No utiliza Python ni requiere dependencias externas.
+
+## Requisitos
+
+Node.js 22 o superior y npm.
+
+## Desarrollo
+
+```sh
+npm run dev
+```
+
+Abre http://localhost:3000. Recarga el navegador después de editar archivos. Detén el servidor con `Ctrl+C`. `npm start` también inicia el servidor local.
 
 ## Estructura
 
 ```text
 index.html
-assets/
-  css/
-    main.css
-  js/
-    main.js
+src/
+  css/main.css
+  js/main.js
   images/
     visual-red.jpg
     visual-collage.jpg
-  documents/
-    jhonatan-sanchez-cv.pdf
+  documents/jhonatan-sanchez-cv.pdf
+scripts/
+  serve.mjs
+  build.mjs
+package.json
+vercel.json
 ```
 
-## Desarrollo local
+Edita el contenido en `index.html`, los estilos en `src/css/main.css` y las interacciones en `src/js/main.js`. Usa nombres en minúsculas separados por guiones y actualiza las referencias al renombrar recursos.
 
-Desde la raíz del proyecto, ejecuta:
+## Compilación y vista previa
 
 ```sh
-python3 -m http.server 8000
+npm run build
+npm run preview
 ```
 
-Abre http://localhost:8000 en el navegador. Detén el servidor con `Ctrl+C`.
-No requiere instalar dependencias ni ejecutar una compilación. Las tipografías de Google Fonts requieren conexión a internet; hay fuentes alternativas locales.
+El build regenera `dist/` con `index.html` y `src/`. La vista previa sirve esa carpeta en http://localhost:3000. No edites `dist/` directamente ni la subas a Git.
 
-## Edición
+## Despliegue en Vercel
 
-- Contenido y secciones: `index.html`.
-- Diseño y estilos adaptables: `assets/css/main.css`.
-- Diálogos y copia del correo: `assets/js/main.js`.
-- Imágenes: `assets/images/`.
-- Currículum: `assets/documents/jhonatan-sanchez-cv.pdf`.
+1. Sube los cambios a tu repositorio de Git.
+2. Importa el repositorio en Vercel y selecciona la raíz de este proyecto.
+3. Publica el proyecto. `vercel.json` configura el preset **Other**, el comando `npm run build` y el directorio de salida `dist`.
 
-Usa nombres en minúsculas y guiones para separar palabras. Al renombrar un recurso, actualiza también sus referencias.
+Vercel publica los archivos estáticos generados; el servidor de desarrollo no se ejecuta en producción.
 
-## Publicación
+Referencia: https://vercel.com/docs/project-configuration/vercel-json
 
-Publica `index.html` y `assets/` juntos desde la raíz. No hay paso de build ni carpeta `dist` necesaria. Si el alojamiento estaba configurado para publicar `dist`, cambia su directorio de publicación a la raíz del repositorio.
-
-Los archivos de macOS, la configuración local del editor y las dependencias quedan excluidos mediante `.gitignore`.
+Las tipografías de Google Fonts requieren conexión a internet; hay fuentes locales alternativas. `.gitignore` excluye archivos de macOS, configuración local del editor y archivos generados.
